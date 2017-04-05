@@ -20,7 +20,7 @@ android {
     }
     sourceSets {
         main {
-            jniLibs.srcDirs = ['\\home\\pgomola\\Pulpit\\ORBSLAM\\app\\src\\main\\jniLibs']
+            jniLibs.srcDirs = ['\\home\\pgomola\\Dokumenty\\ORBSLAM\\app\\src\\main\\jniLibs']
         }
     }
     buildTypes {

@@ -1,5 +1,5 @@
-set(pathToProject /home/pgomola/Pulpit/ORBSLAM)
-set(pathToOpenCv /home/pgomola/Pulpit/ORBSLAM/app/OpenCV-android-sdk)
+set(pathToProject /home/pgomola/Dokumenty/ORBSLAM)
+set(pathToOpenCv /home/pgomola/Dokumenty/ORBSLAM/app/OpenCV-android-sdk)
 
 #Added by the IDE on project create
 cmake_minimum_required(VERSION 3.4.1)
