@@ -177,7 +177,7 @@ inline T wrap(T l, T x, T u)
 inline bool arrayHasNaN(const double* array, int size, int* nanIndex = 0)
 {
   for (int i = 0; i < size; ++i)
-    if (g2o_isnan(array[i])) {
+    if (std::isnan(array[i])) {
       if (nanIndex)
         *nanIndex = i;
       return true;

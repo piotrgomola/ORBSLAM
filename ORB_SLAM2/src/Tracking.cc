@@ -36,7 +36,7 @@
 #include<iostream>
 
 #include<mutex>
-#include <android/log.h>
+#include "android/log.h"
 #define LOG_TAG "ORB_SLAM_TRACK"
 
 #define LOG(...) __android_log_print(ANDROID_LOG_ERROR,LOG_TAG, __VA_ARGS__)
@@ -611,7 +611,6 @@ void Tracking::MonocularInitialization()
             mpInitializer = static_cast<Initializer*>(NULL);
             return;
         }
-
         cv::Mat Rcw; // Current Camera Rotation
         cv::Mat tcw; // Current Camera Translation
         vector<bool> vbTriangulated; // Triangulated Correspondences (mvIniMatches)

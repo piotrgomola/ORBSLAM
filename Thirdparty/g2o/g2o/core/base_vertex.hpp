@@ -36,7 +36,7 @@ template <int D, typename T>
 double BaseVertex<D, T>::solveDirect(double lambda) {
   Matrix <double, D, D> tempA=_hessian + Matrix <double, D, D>::Identity()*lambda;
   double det=tempA.determinant();
-  if (g2o_isnan(det) || det < std::numeric_limits<double>::epsilon())
+  if (std::isnan(det) || det < std::numeric_limits<double>::epsilon())
     return det;
   Matrix <double, D, 1> dx=tempA.llt().solve(_b);
   oplus(&dx[0]);

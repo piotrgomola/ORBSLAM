@@ -9,7 +9,7 @@ set(CMAKE_VERBOSE_MAKEFILE on)
 add_library( native-lib SHARED src/main/cpp/native-lib.cpp )
 
 # OPENCV
-include_directories(${pathToOpenCv}/sdk/native/jni/include)
+include_directories(${pathToProject}/app/OpenCV-android-sdk/sdk/native/jni/include)
 add_library( lib_opencv SHARED IMPORTED )
 set_target_properties(lib_opencv PROPERTIES IMPORTED_LOCATION ${pathToProject}/app/src/main/jniLibs/${ANDROID_ABI}/libopencv_java3.so)
 
@@ -19,8 +19,11 @@ find_library( log-lib log )
 # EIGEN
 include_directories(eigen INTERFACE ${pathToProject}/Thirdparty/eigen3)
 
+# clapack
+# add clapack
+
 # BOOST
-include_directories( ${pathToProject}/Thirdparty/Boost/include )
+include_directories( ${pathToProject}/Thirdparty/Boost/include/boost-1_49 )
 set( boost_lib
      ${pathToProject}/Thirdparty/Boost/lib/libboost_chrono-gcc-mt-1_49.a
      ${pathToProject}/Thirdparty/Boost/lib/libboost_date_time-gcc-mt-1_49.a
@@ -47,6 +50,8 @@ set( boost_lib
      ${pathToProject}/Thirdparty/Boost/lib/libboost_unit_test_framework-gcc-mt-1_49.a
      ${pathToProject}/Thirdparty/Boost/lib/libboost_wave-gcc-mt-1_49.a
      ${pathToProject}/Thirdparty/Boost/lib/libboost_wserialization-gcc-mt-1_49.a)
+
+
 
 # g2o
 # Generate config.h
@@ -139,8 +144,9 @@ ${pathToProject}/Thirdparty/g2o/stuff/string_tools.cpp
 ${pathToProject}/Thirdparty/g2o/stuff/property.cpp
 ${pathToProject}/Thirdparty/g2o/stuff/property.h)
 
-#[[
+
 #DBOW2
+include_directories( ${pathToProject}/Thirdparty/DBoW2 )
 set(HDRS_DBOW2
   ${pathToProject}/Thirdparty/DBoW2/DBoW2/BowVector.h
   ${pathToProject}/Thirdparty/DBoW2/DBoW2/FORB.h
@@ -160,6 +166,33 @@ set(SRCS_DUTILS
   ${pathToProject}/Thirdparty/DBoW2/DUtils/Random.cpp
   ${pathToProject}/Thirdparty/DBoW2/DUtils/Timestamp.cpp)
 add_library(DBoW2 SHARED ${SRCS_DBOW2} ${SRCS_DUTILS})
-]]
+target_link_libraries( DBoW2 lib_opencv)
 
-target_link_libraries( native-lib $\{log-lib} lib_opencv g2o ${boost_lib})
+#ORB-SLAM2
+include_directories( ${pathToProject}/ORB_SLAM2/include )
+add_library( ORBSLAM2 SHARED
+${pathToProject}/ORB_SLAM2/src/System.cc
+${pathToProject}/ORB_SLAM2/src/Tracking.cc
+${pathToProject}/ORB_SLAM2/src/LocalMapping.cc
+${pathToProject}/ORB_SLAM2/src/LoopClosing.cc
+${pathToProject}/ORB_SLAM2/src/ORBextractor.cc
+${pathToProject}/ORB_SLAM2/src/ORBmatcher.cc
+${pathToProject}/ORB_SLAM2/src/FrameDrawer.cc
+${pathToProject}/ORB_SLAM2/src/Converter.cc
+${pathToProject}/ORB_SLAM2/src/MapPoint.cc
+${pathToProject}/ORB_SLAM2/src/KeyFrame.cc
+${pathToProject}/ORB_SLAM2/src/Map.cc
+${pathToProject}/ORB_SLAM2/src/MapDrawer.cc
+${pathToProject}/ORB_SLAM2/src/Optimizer.cc
+${pathToProject}/ORB_SLAM2/src/PnPsolver.cc
+${pathToProject}/ORB_SLAM2/src/Frame.cc
+${pathToProject}/ORB_SLAM2/src/KeyFrameDatabase.cc
+${pathToProject}/ORB_SLAM2/src/Sim3Solver.cc
+${pathToProject}/ORB_SLAM2/src/Initializer.cc
+${pathToProject}/ORB_SLAM2/src/Viewer.cc
+)
+target_link_libraries( ORBSLAM2 $\{log-lib} lib_opencv g2o DBoW2 ${boost_lib} android log EGL GLESv1_CM)
+
+include_directories( ${pathToProject} )
+
+target_link_libraries( native-lib $\{log-lib} lib_opencv ORBSLAM2)
