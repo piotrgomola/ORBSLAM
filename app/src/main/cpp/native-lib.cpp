@@ -16,6 +16,7 @@ JNIEXPORT jstring JNICALL
 Java_pl_poznan_put_orbslam_MainActivity_validate(JNIEnv *env, jobject, jlong addrGray, jlong addrRgba) {
     cv::Rect();
     cv::Mat();
+    cv::Mat mat = cv::Mat::zeros(1, 1, CV_8U);
     std::string hello2 = "Hello from validate";
     return env->NewStringUTF(hello2.c_str());
 }
