@@ -26,4 +26,32 @@
         opencv:show_fps="true"
         opencv:camera_id="any" />
 
+    <ImageView
+        android:id="@+id/image_deald"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentEnd="true"/>
+
+    <RelativeLayout
+        android:id="@+id/progress_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66666666"
+        android:clickable="true"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inicjalizacja słownika"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"
+            android:layout_above="@+id/progress"
+            android:layout_centerHorizontal="true"/>
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
 </RelativeLayout>

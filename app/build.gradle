@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "pl.poznan.put.orbslam"
-        minSdkVersion 19
+        minSdkVersion 10
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -14,7 +14,8 @@ android {
             cmake {
                 cppFlags "-std=gnu++11 -pthread -frtti -fexceptions -D__cplusplus=201103L"
                 //'x86', 'x86_64', 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'mips', 'mips64'
-                abiFilters 'armeabi-v7a'
+                //abiFilters 'armeabi-v7a' //NEXUS and other new phones
+                abiFilters  'armeabi-v7a'
             }
         }
     }
@@ -43,6 +44,8 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     testCompile 'junit:junit:4.12'
     compile project(':openCVLibrary320')
 }

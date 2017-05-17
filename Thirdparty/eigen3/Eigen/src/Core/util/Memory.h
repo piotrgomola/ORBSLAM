@@ -218,19 +218,20 @@ EIGEN_DEVICE_FUNC inline void* aligned_malloc(size_t size)
   check_that_malloc_is_allowed();
 
   void *result;
-  #if EIGEN_DEFAULT_ALIGN_BYTES==0
-    result = std::malloc(size);
-  #elif EIGEN_MALLOC_ALREADY_ALIGNED
-    result = std::malloc(size);
-  #elif EIGEN_HAS_POSIX_MEMALIGN
-    if(posix_memalign(&result, EIGEN_DEFAULT_ALIGN_BYTES, size)) result = 0;
-  #elif EIGEN_HAS_MM_MALLOC
-    result = _mm_malloc(size, EIGEN_DEFAULT_ALIGN_BYTES);
-  #elif EIGEN_OS_WIN_STRICT
-    result = _aligned_malloc(size, EIGEN_DEFAULT_ALIGN_BYTES);
-  #else
-    result = handmade_aligned_malloc(size);
-  #endif
+//  #if EIGEN_DEFAULT_ALIGN_BYTES==0
+//    result = std::malloc(size);
+//  #elif EIGEN_MALLOC_ALREADY_ALIGNED
+//    result = std::malloc(size);
+//  #elif EIGEN_HAS_POSIX_MEMALIGN
+//    if(posix_memalign(&result, EIGEN_DEFAULT_ALIGN_BYTES, size)) result = 0;
+//  #elif EIGEN_HAS_MM_MALLOC
+//    result = _mm_malloc(size, EIGEN_DEFAULT_ALIGN_BYTES);
+//  #elif EIGEN_OS_WIN_STRICT
+//    result = _aligned_malloc(size, EIGEN_DEFAULT_ALIGN_BYTES);
+//  #else
+//    result = handmade_aligned_malloc(size);
+//  #endif
+            result = handmade_aligned_malloc(size);
 
   if(!result && size)
     throw_std_bad_alloc();
