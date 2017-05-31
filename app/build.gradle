@@ -15,7 +15,7 @@ android {
                 cppFlags "-std=gnu++11 -pthread -frtti -fexceptions -D__cplusplus=201103L"
                 //'x86', 'x86_64', 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'mips', 'mips64'
                 //abiFilters 'armeabi-v7a' //NEXUS and other new phones
-                abiFilters  'armeabi-v7a'
+                abiFilters  'x86'
             }
         }
     }

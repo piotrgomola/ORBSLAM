@@ -36,6 +36,7 @@ Java_pl_poznan_put_orbslam_MainActivity_initSystemWithParameters(JNIEnv *env, jo
 extern "C"
 JNIEXPORT jintArray JNICALL
 Java_pl_poznan_put_orbslam_MainActivity_startCurrentORBForCamera(JNIEnv *env, jclass cls,jdouble timestamp, jlong addr,jint w,jint h) {
+    LOG("ORBSLAM CAMERA MEASSURE START");
     const cv::Mat *im = (cv::Mat *) addr;
     cv::Mat ima = s->TrackMonocular(*im, timestamp);
     jintArray resultArray = env->NewIntArray(ima.rows * ima.cols);
@@ -49,6 +50,7 @@ Java_pl_poznan_put_orbslam_MainActivity_startCurrentORBForCamera(JNIEnv *env, jc
     resultPtr[i * ima.cols + j] = 0xff000000 + (R << 16) + (G << 8) + B;
     }
     env->ReleaseIntArrayElements(resultArray, resultPtr, 0);
+    LOG("ORBSLAM CAMERA MEASSURE END");
     return resultArray;
 }
 
